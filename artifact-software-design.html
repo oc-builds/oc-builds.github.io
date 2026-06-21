@@ -53,7 +53,7 @@
   <p class="lead">Software design and engineering. An Android inventory app with a fake login and no database, rebuilt as a full-stack web application: a React front end, a Node and Express backend, an embedded SQLite database, real authentication, server-enforced roles, and a service-layer architecture.</p>
   <div class="pills"><span class="pill">Software design</span><span class="pill">Full-stack</span><span class="pill">Security</span></div>
 
-  <h3 style="font-family:var(--font-head);font-size:23px;font-weight:600;color:var(--ink);margin:8px 0 16px;">Before and after</h3>
+  <h3 class="section-h3" style="margin:8px 0 16px;">Before and after</h3>
     <div class="beforeafter">
       <div class="ba-col before">
         <p class="ba-label">Before, fake login</p>
@@ -84,7 +84,7 @@ export function loginUser({ username, password }) {
       </div>
     </div>
 
-  <div class="card-actions" style="display:flex;gap:10px;flex-wrap:wrap;margin:0 0 8px;max-width:760px;">
+  <div class="card-actions" style="margin:0 0 8px;max-width:760px;">
     <a class="btn btn-secondary btn-sm" href="artifacts/01_software_design/original_android_app/CS360Project2InventoryApp/app/src/main/java/com/example/cs360_project2_sanjay_chauhan/LoginActivity.java">View original code</a>
     <a class="btn btn-primary btn-sm" href="artifacts/01_software_design/enhanced_web_app/server/services/authService.js">View enhanced code</a>
   </div>
@@ -92,15 +92,15 @@ export function loginUser({ username, password }) {
 
 <div class="band">
   <section class="section">
-    <h3 style="font-family:var(--font-head);font-size:23px;font-weight:600;color:var(--ink);margin:0 0 10px;">Browse the code</h3>
-    <p style="max-width:760px;color:var(--muted);margin:0 0 22px;font-size:16px;">The full source for both versions ships with this site. Open any file to read it.</p>
-    <h4 style="font-family:var(--font-head);font-size:16px;color:var(--ink);margin:0 0 10px;">Original</h4>
+    <h3 class="section-h3" style="margin:0 0 10px;">Browse the code</h3>
+    <p class="section-note">The full source for both versions ships with this site. Open any file to read it.</p>
+    <h4 class="section-h4">Original</h4>
     <ul class="filelinks">
       <li><a href="artifacts/01_software_design/original_android_app/CS360Project2InventoryApp/app/src/main/java/com/example/cs360_project2_sanjay_chauhan/LoginActivity.java"><span>LoginActivity.java</span> <span class="path">original_android_app/.../LoginActivity.java</span></a></li>
       <li><a href="artifacts/01_software_design/original_android_app/CS360Project2InventoryApp/app/src/main/java/com/example/cs360_project2_sanjay_chauhan/InventoryActivity.java"><span>InventoryActivity.java</span> <span class="path">original_android_app/.../InventoryActivity.java</span></a></li>
       <li><a href="artifacts/01_software_design/original_android_app/CS360Project2InventoryApp/app/src/main/java/com/example/cs360_project2_sanjay_chauhan/AddItemActivity.java"><span>AddItemActivity.java</span> <span class="path">original_android_app/.../AddItemActivity.java</span></a></li>
     </ul>
-    <h4 style="font-family:var(--font-head);font-size:16px;color:var(--ink);margin:0 0 10px;">Enhanced</h4>
+    <h4 class="section-h4">Enhanced</h4>
     <ul class="filelinks">
       <li><a href="artifacts/01_software_design/enhanced_web_app/server/services/authService.js"><span>authService.js</span> <span class="path">enhanced_web_app/server/services/authService.js</span></a></li>
       <li><a href="artifacts/01_software_design/enhanced_web_app/server/services/inventoryService.js"><span>inventoryService.js</span> <span class="path">enhanced_web_app/server/services/inventoryService.js</span></a></li>
@@ -137,7 +137,7 @@ export function loginUser({ username, password }) {
   <div class="footer-inner">
     <p>Copyright 2026 Sanjay Chauhan. All rights reserved.</p>
     <a class="footer-link" href="https://github.com/oc-builds">
-      <span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#A9ABA6;display:inline-block;flex:none;"></span>
+      <span class="dot" aria-hidden="true"></span>
       GitHub profile, github.com/oc-builds
     </a>
   </div>
