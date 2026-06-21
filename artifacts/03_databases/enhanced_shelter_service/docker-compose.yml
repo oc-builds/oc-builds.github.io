@@ -1,0 +1,34 @@
+# docker-compose.yml
+#
+# Brings up MongoDB 7 for the CS499 Enhancement Three rebuild of the Austin
+# Animal Center project. Persistent named volume so data survives container
+# restarts, port 27017 on localhost so the FastAPI service (host-side) and the
+# helper scripts (db_setup, migrate_geojson, seed) can connect over the same
+# MONGO_URI a grader would use.
+#
+# Author: Sanjay Chauhan
+# Date:   2026-06-07
+# Context: CS499 Enhancement Three rebuild of the CS340 Austin Animal Center
+#          project. This is the canonical run path documented in README.md.
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: aac_mongo
+    restart: unless-stopped
+    ports:
+      # Bind to localhost only -- this is a single-developer demo, not a
+      # multi-host deployment. Exposing :27017 publicly would defeat the
+      # security work that lives inside the API layer.
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - aac_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 }).ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  aac_data:
+    name: aac_data

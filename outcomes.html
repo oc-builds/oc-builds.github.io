@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outcomes, CS 499 Capstone ePortfolio, Sanjay Chauhan</title>
+<meta name="description" content="The five CS 499 course outcomes mapped to concrete evidence in the portfolio.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oc-builds.github.io/outcomes.html">
+<meta property="og:title" content="Outcomes, CS 499 Capstone ePortfolio, Sanjay Chauhan">
+<meta property="og:description" content="The five CS 499 course outcomes mapped to concrete evidence in the portfolio.">
+<meta property="og:image" content="https://oc-builds.github.io/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Outcomes, CS 499 Capstone ePortfolio, Sanjay Chauhan">
+<meta name="twitter:description" content="The five CS 499 course outcomes mapped to concrete evidence in the portfolio.">
+<meta name="twitter:image" content="https://oc-builds.github.io/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="index.html">
+      <span class="monogram" aria-hidden="true">SC</span>
+      Sanjay Chauhan
+    </a>
+    <ul class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#self-assessment">Self-Assessment</a></li>
+      <li><a href="code-review.html">Code Review</a></li>
+      <li class="nav-dropdown">
+        <details>
+          <summary>Artifacts</summary>
+          <ul class="menu">
+            <li><a href="artifact-software-design.html">Software Design and Engineering (CS 360)</a></li>
+            <li><a href="artifact-algorithms.html">Algorithms and Data Structures (CS 300)</a></li>
+            <li><a href="artifact-databases.html">Databases (CS 340)</a></li>
+          </ul>
+        </details>
+      </li>
+      <li><a href="outcomes.html" aria-current="page">Outcomes</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+<div class="band">
+  <section class="section" id="outcomes">
+    <p class="eyebrow">04 / Outcomes</p>
+    <h1 class="h2">Course outcomes and evidence</h1>
+    <p class="lead">Each of the five program outcomes mapped to the work that demonstrates it: the artifacts, their narratives, the recorded code review, and the professional self-assessment.</p>
+
+    <div class="table-wrap">
+      <table class="outcomes">
+        <thead>
+          <tr>
+            <th scope="col" style="width:30%;">Course outcome</th>
+            <th scope="col">Evidence in this portfolio</th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr><th scope="row">Outcome 1: Employ strategies for building collaborative environments that enable diverse audiences to support organizational decision making in the field of computer science</th><td>The databases enhancement ships a <code>CONTRIBUTING.md</code> with a branching strategy and pull-request template, an auto-generated OpenAPI contract that lets front-end and back-end developers build from separate repositories, and three named roles, a shelter manager, an intake clerk, and a partner-rescue auditor, each making a specific decision from one source of truth. Evidence: <a class="tlink" href="artifact-databases.html">Databases artifact</a> and self-assessment.</td></tr>
+      <tr><th scope="row">Outcome 2: Design, develop, and deliver professional-quality oral, written, and visual communications that are coherent, technically sound, and appropriately adapted to specific audiences and contexts</th><td>The recorded <a class="tlink" href="code-review.html">code review</a> is communication for a manager rather than a compiler. Each artifact has a written narrative, a README, and header comments that explain why a decision was made. The <a class="tlink" href="index.html#self-assessment">professional self-assessment</a> frames the whole portfolio for a hiring audience.</td></tr>
+      <tr><th scope="row">Outcome 3: Design and evaluate computing solutions that solve a given problem using algorithmic principles and computer science practices and standards appropriate to its solution, while managing the trade-offs involved in design choices</th><td>The <a class="tlink" href="artifact-algorithms.html">algorithms enhancement</a> replaces an unbalanced binary search tree with a self-balancing AVL tree and adds a directed prerequisite graph with three-color depth-first cycle detection, each choice justified with Big-O analysis and an explicit trade-off discussion. The databases indexing decisions and the SQLite-versus-PostgreSQL choice in the software design artifact are evaluated the same way.</td></tr>
+      <tr><th scope="row">Outcome 4: Demonstrate an ability to use well-founded and innovative techniques, skills, and tools in computing practices for the purpose of implementing computer solutions that deliver value and accomplish industry-specific goals</th><td>Each artifact applies current production-grade tools correctly: React, Node, Express, SQLite, JWT and bcrypt in the <a class="tlink" href="artifact-software-design.html">software design artifact</a>; AVL trees and three-color DFS in the <a class="tlink" href="artifact-algorithms.html">algorithms artifact</a>; FastAPI, MongoDB 7, Pydantic, and 2dsphere indexing in the <a class="tlink" href="artifact-databases.html">databases artifact</a>.</td></tr>
+      <tr><th scope="row">Outcome 5: Develop a security mindset that anticipates adversarial exploits in software architecture and designs to expose potential vulnerabilities, mitigate design flaws, and ensure privacy and enhanced security of data and resources</th><td>Security is treated as a design constraint across all three artifacts: hashed passwords, pinned JWT algorithm, server-enforced role-based access, parameterized queries and schema validation, secrets kept out of source with fail-fast on missing configuration, a rate-limited login endpoint, and an audited write chokepoint with secret redaction. The narratives are explicit about the limits of each claim. See all three artifact pages and the <a class="tlink" href="index.html#self-assessment">self-assessment</a>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose" style="margin-top:44px;">
+      <h3>How the evidence is distributed</h3>
+      <p>No single artifact carries an outcome alone. Each enhancement leads on a different core area while contributing to the others, and the self-assessment and code review tie them together. As a result, all five outcomes are demonstrated more than once across the portfolio.</p>
+      <ul>
+        <li><a class="tlink" href="artifact-software-design.html">Software design and engineering, CS 360</a>: full-stack rebuild with a service layer, server-enforced roles, and parameterized queries.</li>
+        <li><a class="tlink" href="artifact-algorithms.html">Algorithms and data structures, CS 300</a>: AVL tree, prerequisite graph, and three-color depth-first cycle detection with written complexity analysis.</li>
+        <li><a class="tlink" href="artifact-databases.html">Databases, CS 340</a>: FastAPI and MongoDB service with schema validation, deliberate indexing, and an audited write chokepoint.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>Copyright 2026 Sanjay Chauhan. All rights reserved.</p>
+    <a class="footer-link" href="https://github.com/oc-builds">
+      <span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#A9ABA6;display:inline-block;flex:none;"></span>
+      GitHub profile, github.com/oc-builds
+    </a>
+  </div>
+</footer>
+</body>
+</html>

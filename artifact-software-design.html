@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Software Design and Engineering, CS 360, Sanjay Chauhan</title>
+<meta name="description" content="The software design and engineering artifact: an Android inventory app rebuilt as a React, Node, Express, and SQLite full-stack web application with authentication, role-based access, and a service layer.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oc-builds.github.io/artifact-software-design.html">
+<meta property="og:title" content="Software Design and Engineering, CS 360, Sanjay Chauhan">
+<meta property="og:description" content="The software design and engineering artifact: an Android inventory app rebuilt as a React, Node, Express, and SQLite full-stack web application with authentication, role-based access, and a service layer.">
+<meta property="og:image" content="https://oc-builds.github.io/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Software Design and Engineering, CS 360, Sanjay Chauhan">
+<meta name="twitter:description" content="The software design and engineering artifact: an Android inventory app rebuilt as a React, Node, Express, and SQLite full-stack web application with authentication, role-based access, and a service layer.">
+<meta name="twitter:image" content="https://oc-builds.github.io/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="index.html">
+      <span class="monogram" aria-hidden="true">SC</span>
+      Sanjay Chauhan
+    </a>
+    <ul class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#self-assessment">Self-Assessment</a></li>
+      <li><a href="code-review.html">Code Review</a></li>
+      <li class="nav-dropdown">
+        <details>
+          <summary aria-current="true">Artifacts</summary>
+          <ul class="menu">
+            <li><a href="artifact-software-design.html" aria-current="page">Software Design and Engineering (CS 360)</a></li>
+            <li><a href="artifact-algorithms.html">Algorithms and Data Structures (CS 300)</a></li>
+            <li><a href="artifact-databases.html">Databases (CS 340)</a></li>
+          </ul>
+        </details>
+      </li>
+      <li><a href="outcomes.html">Outcomes</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+<section class="section">
+  <p class="eyebrow">03 / Artifact one</p>
+  <h1 class="h2">Inventory app, full-stack rebuild</h1>
+  <p class="lead">Software design and engineering. An Android inventory app with a fake login and no database, rebuilt as a full-stack web application: a React front end, a Node and Express backend, an embedded SQLite database, real authentication, server-enforced roles, and a service-layer architecture.</p>
+  <div class="pills"><span class="pill">Software design</span><span class="pill">Full-stack</span><span class="pill">Security</span></div>
+
+  <h3 style="font-family:var(--font-head);font-size:23px;font-weight:600;color:var(--ink);margin:8px 0 16px;">Before and after</h3>
+    <div class="beforeafter">
+      <div class="ba-col before">
+        <p class="ba-label">Before, fake login</p>
+        <pre class="ba-code before"><code>// LoginActivity.java (Android, original)
+loginButton.setOnClickListener(v -&gt; {
+  String username = ...getText()...trim();
+  String password = ...getText()...trim();
+
+  // credential check goes here once
+  // the database is set up
+  startActivity(new Intent(this,
+      InventoryActivity.class));
+});</code></pre>
+      </div>
+      <div class="ba-col after">
+        <p class="ba-label">After, real auth</p>
+        <pre class="ba-code after"><code>// authService.js (Node + Express, enhanced)
+export function loginUser({ username, password }) {
+  const account = findByUsernameStmt.get(username);
+  if (!account ||
+      !bcrypt.compareSync(
+        password, account.password_hash)) {
+    throw new ServiceError(401,
+      &quot;Invalid username or password&quot;);
+  }
+  return { token: signToken(account), user };
+}</code></pre>
+      </div>
+    </div>
+
+  <div class="card-actions" style="display:flex;gap:10px;flex-wrap:wrap;margin:0 0 8px;max-width:760px;">
+    <a class="btn btn-secondary btn-sm" href="artifacts/01_software_design/original_android_app/CS360Project2InventoryApp/app/src/main/java/com/example/cs360_project2_sanjay_chauhan/LoginActivity.java">View original code</a>
+    <a class="btn btn-primary btn-sm" href="artifacts/01_software_design/enhanced_web_app/server/services/authService.js">View enhanced code</a>
+  </div>
+</section>
+
+<div class="band">
+  <section class="section">
+    <h3 style="font-family:var(--font-head);font-size:23px;font-weight:600;color:var(--ink);margin:0 0 10px;">Browse the code</h3>
+    <p style="max-width:760px;color:var(--muted);margin:0 0 22px;font-size:16px;">The full source for both versions ships with this site. Open any file to read it.</p>
+    <h4 style="font-family:var(--font-head);font-size:16px;color:var(--ink);margin:0 0 10px;">Original</h4>
+    <ul class="filelinks">
+      <li><a href="artifacts/01_software_design/original_android_app/CS360Project2InventoryApp/app/src/main/java/com/example/cs360_project2_sanjay_chauhan/LoginActivity.java"><span>LoginActivity.java</span> <span class="path">original_android_app/.../LoginActivity.java</span></a></li>
+      <li><a href="artifacts/01_software_design/original_android_app/CS360Project2InventoryApp/app/src/main/java/com/example/cs360_project2_sanjay_chauhan/InventoryActivity.java"><span>InventoryActivity.java</span> <span class="path">original_android_app/.../InventoryActivity.java</span></a></li>
+      <li><a href="artifacts/01_software_design/original_android_app/CS360Project2InventoryApp/app/src/main/java/com/example/cs360_project2_sanjay_chauhan/AddItemActivity.java"><span>AddItemActivity.java</span> <span class="path">original_android_app/.../AddItemActivity.java</span></a></li>
+    </ul>
+    <h4 style="font-family:var(--font-head);font-size:16px;color:var(--ink);margin:0 0 10px;">Enhanced</h4>
+    <ul class="filelinks">
+      <li><a href="artifacts/01_software_design/enhanced_web_app/server/services/authService.js"><span>authService.js</span> <span class="path">enhanced_web_app/server/services/authService.js</span></a></li>
+      <li><a href="artifacts/01_software_design/enhanced_web_app/server/services/inventoryService.js"><span>inventoryService.js</span> <span class="path">enhanced_web_app/server/services/inventoryService.js</span></a></li>
+      <li><a href="artifacts/01_software_design/enhanced_web_app/server/services/serviceError.js"><span>serviceError.js</span> <span class="path">enhanced_web_app/server/services/serviceError.js</span></a></li>
+      <li><a href="artifacts/01_software_design/enhanced_web_app/server/routes/auth.js"><span>routes/auth.js</span> <span class="path">enhanced_web_app/server/routes/auth.js</span></a></li>
+      <li><a href="artifacts/01_software_design/enhanced_web_app/server/middleware/auth.js"><span>middleware/auth.js</span> <span class="path">enhanced_web_app/server/middleware/auth.js</span></a></li>
+      <li><a href="artifacts/01_software_design/enhanced_web_app/README.md"><span>README.md</span> <span class="path">enhanced_web_app/README.md</span></a></li>
+    </ul>
+  </section>
+</div>
+
+<section class="section">
+  <p class="eyebrow">Narrative</p>
+  <h2 class="h2">Enhancement narrative</h2>
+  <p class="lead">The full Milestone Two narrative for the software design and engineering enhancement.</p>
+  <div class="prose">
+    <h3>Describe the artifact</h3>
+    <p>The artifact is an inventory management application I originally built for CS 360, Mobile Architecture and Programming. The original is an Android app written in Java with three screens: a login screen, an inventory list, and an add-item form. It uses a Material 3 interface and the navigation between screens works, but the back end was never finished. The login screen accepts any username and password as long as both fields have text, with a comment in the source admitting the credential check was left for a later project. There is no database, so the inventory screen has nothing to display and the add-item form shows a confirmation message without saving anything. An SMS alerts toggle is half-wired, with the Android permission flow in place but no code that actually sends a message. For Milestone Two I rebuilt this artifact as a working web application.</p>
+    <h3>Justify the inclusion of the artifact and the improvements made</h3>
+    <p>I selected this artifact because its weaknesses are exactly the kind of thing a software design enhancement should fix, and because rebuilding it lets me show full-stack work rather than a single layer. The enhanced version is a React single-page frontend with a Node.js and Express backend and an embedded SQLite database. The three Android screens map to three React routes. The fake login is now real authentication: passwords are hashed with bcrypt, and a successful login returns a JSON Web Token that the client sends on every protected request. The empty inventory screen is now a searchable table backed by a real Express API, and the add-item form is now a real endpoint that validates its input and writes to the database. I added role-based access control with two roles, admin and staff, enforced by middleware on the server: any authenticated user, admin or staff, can read the inventory and add new items, while updating and deleting an item are restricted to an admin. Every database query uses parameterized statements, which prevents SQL injection, and every endpoint that accepts input validates it with the Zod schema library before touching the database. The unused Android permissions are simply gone, because the web version has no equivalent attack surface. A seed script, seed.js, populates the database with two demo accounts and fifteen realistic inventory items so the application can be run and reviewed immediately.</p>
+    <h4>Service-layer extraction and the thin-route pattern</h4>
+    <p>The most important structural change is one I made after Dr. Bolton's Milestone Two feedback. In the version I first submitted, the Express route handlers did everything: they parsed the request, ran the business rules, called the SQLite database directly through db.prepare, and shaped the response, all in one function. I refactored that into a dedicated service layer so the routes are now thin. A route now parses and validates the request, calls a service function, and shapes the response, and nothing more. The business logic lives in three new modules. authService.js owns account creation and login, including bcrypt hashing, JWT signing, and the rule that the first user to register becomes the admin while every later account defaults to staff. Its public surface is two functions, registerUser and loginUser. inventoryService.js owns the inventory operations, listItems, createItem, updateItem, and deleteItem, along with the SKU-uniqueness rule and the existence checks. serviceError.js defines a small ServiceError class that carries an HTTP status code but knows nothing about Express, so a service can report a duplicate SKU or a taken username without importing the web framework. A single error handler in the server translates a ServiceError into the right HTTP response, which keeps the routes free of repeated status-code logic. The named building blocks on the client side, AuthProvider and useAuth in auth.jsx, the apiRequest helper in api.js, and the Login, Inventory, and ItemForm pages, talk to those routes, while requireAuth and requireRole in the server middleware guard them. The credentialsSchema and itemSchema Zod definitions validate input at the boundary.</p>
+    <p>One design decision is worth explaining directly. In the Module 1 code review I planned to use PostgreSQL as the database. During the build I switched to SQLite. PostgreSQL requires a separate database server to be installed, running, and configured before the application will start, which would make the artifact difficult for a reviewer to actually run. SQLite is an embedded database that ships as part of the project, so the application runs after a single dependency install with no external setup. The relational design, the schema, the constraints, and the parameterized queries are all identical to what they would be with PostgreSQL; only the database engine changed. I judged that a portable, immediately runnable artifact was worth more than matching the original plan exactly, and choosing the right tool for the constraints of the project is itself a software design skill.</p>
+    <h3>Course outcomes</h3>
+    <p>In Module 1 I planned for this enhancement to support three course outcomes, and it does. Outcome 2, designing and delivering professional-quality communication, is met through the README that documents how to run the project, the header comments and inline comments throughout the code, and this narrative. Outcome 4, using well-founded and innovative techniques, is met through the React, Express, SQLite, JWT, and bcrypt stack, all current industry-standard tools applied to turn a stub-only mobile app into a working product, and now through the service-layer architecture that separates concerns cleanly. Outcome 5, building a security mindset, is met through bcrypt password hashing, JSON Web Token authentication, role-based access control, parameterized SQL, input validation, and the removal of unused permissions. I have no changes to my outcome plan. The remaining two outcomes, algorithmic design and collaborative environments, are planned for the second and third enhancements in Modules 4 and 5.</p>
+    <h3>Reflection on the process</h3>
+    <p>The hardest part was not writing any single feature but keeping the contract between the frontend and the backend consistent. The React client and the Express server are separate programs, and every endpoint has an agreed shape for its request and its response. The clearest example came from the edit screen. ItemForm.jsx tried to load a single item by calling a GET-by-id endpoint that the backend never actually implemented, so the edit page came up empty with no obvious error. I traced the failure by watching the network request the client made, comparing it against the routes the server really exposed, and confirming that the path the client expected returned nothing. Rather than add an endpoint the rest of the application did not need, I reconciled the client to the real contract: around line 55 of ItemForm.jsx the form now fetches the existing inventory list through apiRequest and selects the matching item on the client by its id. That incident taught me to treat the API contract as a fixed specification and to build both sides against it rather than changing one freely.</p>
+    <p>Dr. Bolton's Milestone Two feedback shaped the second half of this work, and I want to be specific about how I incorporated each point. She asked me to apply the Single Responsibility Principle and isolate the core business logic from the HTTP routing and the database calls, and that is exactly what the service-layer extraction does: the routes now handle HTTP, the services hold the business rules, and serviceError.js keeps the two from leaking into each other. She asked for explicit encapsulation and a clear sense of what is public versus internal. I addressed that at the module boundary rather than with Java-style access keywords, which JavaScript does not have. Each service exports only its intended public functions, registerUser and loginUser, or the four inventory functions, while the helpers, the prepared SQL statements, and the token-signing routine stay unexported and therefore unreachable from outside the module. I noted that reasoning in the comments so it reads as a deliberate choice. She asked that comments explain the why and not restate the what, so I rewrote the comments to record decisions, such as why bcrypt uses ten salt rounds and why the service layer must not import Express, instead of narrating the obvious. She asked for compliance with an industry style guide, and the project now passes ESLint with no warnings on both the client and the server, with an ESLint configuration committed alongside the code. Finally she asked me to name the specific modules I built and to expand on my troubleshooting steps, which is why this narrative points to authService.js, inventoryService.js, and serviceError.js by name and walks through the API-contract-drift incident in detail.</p>
+    <p>The security work was also more involved than I expected. Adding authentication is straightforward; making sure every protected route actually checks the token through requireAuth, that role enforcement through requireRole cannot be skipped, and that no validation gap lets bad data through took careful, repetitive checking. The SQLite decision described above was another clear lesson of the milestone: the plan from Module 1 met resistance from a practical constraint, and the right response was to adjust the plan for a defensible reason rather than follow it past the point where it still made sense.</p>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>Copyright 2026 Sanjay Chauhan. All rights reserved.</p>
+    <a class="footer-link" href="https://github.com/oc-builds">
+      <span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#A9ABA6;display:inline-block;flex:none;"></span>
+      GitHub profile, github.com/oc-builds
+    </a>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algorithms and Data Structures, CS 300, Sanjay Chauhan</title>
+<meta name="description" content="The algorithms and data structures artifact: a C++ course advisor whose unbalanced binary search tree was replaced with a self-balancing AVL tree and a directed prerequisite graph with three-color depth-first cycle detection.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oc-builds.github.io/artifact-algorithms.html">
+<meta property="og:title" content="Algorithms and Data Structures, CS 300, Sanjay Chauhan">
+<meta property="og:description" content="The algorithms and data structures artifact: a C++ course advisor whose unbalanced binary search tree was replaced with a self-balancing AVL tree and a directed prerequisite graph with three-color depth-first cycle detection.">
+<meta property="og:image" content="https://oc-builds.github.io/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Algorithms and Data Structures, CS 300, Sanjay Chauhan">
+<meta name="twitter:description" content="The algorithms and data structures artifact: a C++ course advisor whose unbalanced binary search tree was replaced with a self-balancing AVL tree and a directed prerequisite graph with three-color depth-first cycle detection.">
+<meta name="twitter:image" content="https://oc-builds.github.io/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="index.html">
+      <span class="monogram" aria-hidden="true">SC</span>
+      Sanjay Chauhan
+    </a>
+    <ul class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#self-assessment">Self-Assessment</a></li>
+      <li><a href="code-review.html">Code Review</a></li>
+      <li class="nav-dropdown">
+        <details>
+          <summary aria-current="true">Artifacts</summary>
+          <ul class="menu">
+            <li><a href="artifact-software-design.html">Software Design and Engineering (CS 360)</a></li>
+            <li><a href="artifact-algorithms.html" aria-current="page">Algorithms and Data Structures (CS 300)</a></li>
+            <li><a href="artifact-databases.html">Databases (CS 340)</a></li>
+          </ul>
+        </details>
+      </li>
+      <li><a href="outcomes.html">Outcomes</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+<section class="section">
+  <p class="eyebrow">03 / Artifact two</p>
+  <h1 class="h2">Course advisor, AVL tree and prerequisite graph</h1>
+  <p class="lead">Algorithms and data structures. A C++ console course advisor built on an unbalanced binary search tree, rebuilt with a self-balancing AVL tree, a directed prerequisite graph, and three-color depth-first cycle detection, with the time complexity of every choice documented.</p>
+  <div class="pills"><span class="pill">Algorithms</span><span class="pill">Data structures</span><span class="pill">Trade-offs</span></div>
+
+  <h3 style="font-family:var(--font-head);font-size:23px;font-weight:600;color:var(--ink);margin:8px 0 16px;">Before and after</h3>
+    <div class="beforeafter">
+      <div class="ba-col before">
+        <p class="ba-label">Before, BST</p>
+        <pre class="ba-code before"><code>// ProjectTwo.cpp (original, unbalanced BST)
+Node* insertNode(Node* node, Course course) {
+  if (node == nullptr)
+    return new Node(course);
+  if (course.courseNumber &lt;
+      node-&gt;course.courseNumber)
+    node-&gt;left  = insertNode(node-&gt;left, course);
+  else if (...)
+    node-&gt;right = insertNode(node-&gt;right, course);
+  return node;            // no rebalance: O(n) worst case
+}</code></pre>
+      </div>
+      <div class="ba-col after">
+        <p class="ba-label">After, AVL tree</p>
+        <pre class="ba-code after"><code>// AVLTree.cpp (enhanced, self-balancing)
+Node* InsertNode(Node* node, const Course&amp; c,
+                 bool&amp; inserted) {
+  ...                       // BST descent
+  UpdateHeight(node);
+  const int bf = BalanceFactor(node);
+  if (bf &gt; 1 &amp;&amp; c.id &lt; node-&gt;left-&gt;course.id)
+    return RotateRight(node);   // LL
+  if (bf &lt; -1 &amp;&amp; c.id &gt; node-&gt;right-&gt;course.id)
+    return RotateLeft(node);    // RR
+  ...                       // LR, RL -&gt; O(log n) guaranteed
+}</code></pre>
+      </div>
+    </div>
+
+  <div class="card-actions" style="display:flex;gap:10px;flex-wrap:wrap;margin:0 0 8px;max-width:760px;">
+    <a class="btn btn-secondary btn-sm" href="artifacts/02_algorithms/original_bst_advisor/ProjectTwo.cpp">View original code</a>
+    <a class="btn btn-primary btn-sm" href="artifacts/02_algorithms/enhanced_avl_advisor/AVLTree.h">View enhanced code</a>
+  </div>
+</section>
+
+<div class="band">
+  <section class="section">
+    <h3 style="font-family:var(--font-head);font-size:23px;font-weight:600;color:var(--ink);margin:0 0 10px;">Browse the code</h3>
+    <p style="max-width:760px;color:var(--muted);margin:0 0 22px;font-size:16px;">The full source for both versions ships with this site. Open any file to read it.</p>
+    <h4 style="font-family:var(--font-head);font-size:16px;color:var(--ink);margin:0 0 10px;">Original</h4>
+    <ul class="filelinks">
+      <li><a href="artifacts/02_algorithms/original_bst_advisor/ProjectTwo.cpp"><span>ProjectTwo.cpp</span> <span class="path">original_bst_advisor/ProjectTwo.cpp</span></a></li>
+      <li><a href="artifacts/02_algorithms/original_bst_advisor/ABCU_Advising_Program_Input.csv"><span>ABCU_Advising_Program_Input.csv</span> <span class="path">original_bst_advisor/ABCU_Advising_Program_Input.csv</span></a></li>
+    </ul>
+    <h4 style="font-family:var(--font-head);font-size:16px;color:var(--ink);margin:0 0 10px;">Enhanced</h4>
+    <ul class="filelinks">
+      <li><a href="artifacts/02_algorithms/enhanced_avl_advisor/AVLTree.h"><span>AVLTree.h</span> <span class="path">enhanced_avl_advisor/AVLTree.h</span></a></li>
+      <li><a href="artifacts/02_algorithms/enhanced_avl_advisor/AVLTree.cpp"><span>AVLTree.cpp</span> <span class="path">enhanced_avl_advisor/AVLTree.cpp</span></a></li>
+      <li><a href="artifacts/02_algorithms/enhanced_avl_advisor/PrereqGraph.h"><span>PrereqGraph.h</span> <span class="path">enhanced_avl_advisor/PrereqGraph.h</span></a></li>
+      <li><a href="artifacts/02_algorithms/enhanced_avl_advisor/PrereqGraph.cpp"><span>PrereqGraph.cpp</span> <span class="path">enhanced_avl_advisor/PrereqGraph.cpp</span></a></li>
+      <li><a href="artifacts/02_algorithms/enhanced_avl_advisor/CsvLoader.cpp"><span>CsvLoader.cpp</span> <span class="path">enhanced_avl_advisor/CsvLoader.cpp</span></a></li>
+      <li><a href="artifacts/02_algorithms/enhanced_avl_advisor/main.cpp"><span>main.cpp</span> <span class="path">enhanced_avl_advisor/main.cpp</span></a></li>
+      <li><a href="artifacts/02_algorithms/enhanced_avl_advisor/README.md"><span>README.md</span> <span class="path">enhanced_avl_advisor/README.md</span></a></li>
+    </ul>
+  </section>
+</div>
+
+<section class="section">
+  <p class="eyebrow">Narrative</p>
+  <h2 class="h2">Enhancement narrative</h2>
+  <p class="lead">The full Milestone Three narrative for the algorithms and data structures enhancement.</p>
+  <div class="prose">
+    <h3>Describe the artifact</h3>
+    <p>The artifact is the ABCU Course Advisor, a C++ console application I originally built as Project Two for CS 300, Data Structures and Algorithms, earlier in the SNHU computer science program. The original loads a CSV catalog of computer science courses into a binary search tree, prints the catalog in alphabetical order using an in-order traversal, and looks up a single course and its prerequisites. It is one 397-line file. It works, and the comments are honest about what it cannot do. The BST has no rebalancing. Prerequisites are stored as raw strings with no check that they match real courses. There is no defense against a catalog with circular prerequisites. For Milestone Three I rebuilt the engine underneath the same menu and addressed all three.</p>
+    <h3>Justify the inclusion of the artifact and the improvements made</h3>
+    <p>I picked this artifact because its weaknesses are the exact problems an algorithms enhancement should fix, and because the trade-offs are explainable to a non-technical reader if you do the work. Three things changed under the hood. The unbalanced BST was replaced with a self-balancing AVL tree that tracks node heights and rotates on every insert that pushes a balance factor past plus or minus one (LL, RR, LR, RL). A directed prerequisite graph is built alongside the tree in a two-pass load, because the original CSV references CSCI200 on row two before declaring it on row eight, and a single-pass loader would reject the file. A depth-first search with three-color marking walks the graph at load time and reports any cycle by exact course IDs. The same pass also flags any prerequisite that is referenced but never defined. The menu the user sees is unchanged. The work is all underneath.</p>
+    <p>The Big-O story matters most for this category. The original BST insertion is O(log n) on average and O(n) in the worst case when input arrives in sorted order. A course catalog exported from a registrar system is a realistic adversarial input, since a human or an export tool will routinely alphabetize by course ID. The 8-row CSV that ships with the project happens to be in a mixed order that avoids the worst case, so I added a second CSV (ABCU_Advising_Program_Input_Sorted.csv) that is sorted by ID and would force the original BST to degenerate. The AVL gives O(log n) on every insert and search regardless of input order, because the rotations keep the balance invariant on every node. Graph construction is O(V + E) where V is courses and E is prerequisite relationships. The DFS cycle detector is also O(V + E), because each vertex is colored at most twice on its way from white to gray to black. The in-order traversal is still O(n) work, but the recursion depth is now O(log n) instead of the O(n) it could become on a degenerate tree, so the call stack is bounded.</p>
+    <p>One design decision is worth explaining directly because it diverges from a strict reading of the enhancement plan. The Module 1 plan described prerequisite validation as a hard rule that would reject any invalid catalog. During the build I realized that reject is the wrong default. A registrar running this on a catalog with one typo or one cyclic reference still wants to see the list of valid courses so they can find the problem. So the enhanced version warns and continues. The cycle is printed by exact ID. The missing prerequisites are listed by exact ID. The menu still opens. That is a more useful program, and the change is documented in the source and the README so the next reader sees the reasoning.</p>
+    <p>The code was structured per Dr. Bolton's Single Responsibility guidance from Milestone Two. The AVL tree, the prerequisite graph, the CSV loader, and the menu UI live in separate files, so each one has one job and the tree never needs to care how the graph or the CSV work. Every class hides its internals behind private members and a small public API, and no raw pointers escape any class. The AVL destructor walks the tree post-order and deletes every node, and the classes are marked non-copyable so the owning pointers cannot be double-freed. Every public method and every private helper carries a Big-O note in its header comment, including the four rotation helpers, the graph builder, the DFS visitor, and the in-order traversal. Comments document the why rather than the what, which is the specific thing Dr. Bolton called out in Milestone Two feedback. The AVL header, for example, explains that AVL was chosen because a sorted exporter is a realistic adversarial input, not that the file is an AVL tree.</p>
+    <h3>Course outcomes</h3>
+    <p>In Module 1 I planned for this enhancement to support three course outcomes, primarily Outcome 3 (algorithmic design and trade-offs), and it does. Outcome 3 is met by the AVL versus BST analysis with Big-O, by the choice of three-color DFS over a parent-tracking cycle detector, and by the two-pass loader decision, which is a small but real trade-off that the original plan missed. Outcome 4 (well-founded techniques) is met because AVL trees and three-color DFS are textbook algorithms applied correctly with their published complexity guarantees. Outcome 5 (security mindset) is met through input validation as a first-class concern. The loader treats the CSV as untrusted, the validator catches missing references, and the cycle detector rejects nonsense advising paths that would otherwise propagate. Outcome 2 (communication) is met through this narrative, the README, and the Big-O notes in every header. I have no changes to the outcome-coverage plan. Outcome 1 (collaborative environments) is planned for the Module 5 databases enhancement narrative, where it is the natural fit.</p>
+    <h3>Reflection on the process</h3>
+    <p>The hardest part of this build happened during planning, not coding. My first draft of the justification claimed the original CSV "degenerates" the BST because it loads in sorted order. When I actually opened the file I saw the rows are not in sorted order. They are in a mixed order that produces a perfectly fine branchy tree. The AVL advantage exists, but it exists for adversarial input, not for the shipped catalog. I caught it before writing any code, which is the only reason this narrative does not lean on a false claim. The small lesson there is to look at the actual data before defending a design choice.</p>
+    <p>A similar thing happened with the CSV loader. A single pass through the file seems obvious at first. You read each row, add the course, add its prerequisite edges. But the original CSV's second row references CSCI200, which is not declared until the eighth row. A single pass would reject the file at row two for a missing prerequisite that actually exists. Splitting the load into a pass that builds the node set first and a pass that resolves edges second was easy to overlook in pseudocode. It became obvious only after walking through a real file in my head.</p>
+    <p>What I will take from this milestone is the difference between a correct rule and a useful rule. The plan said the loader should reject any invalid catalog. The implementation warns and continues. Reject is easy to defend in a textbook. Warn, show the cycle by exact name, and let the user inspect the data is what an advisor actually needs from this program. That trade-off is, in a small way, what Outcome 3 is really asking about. The work is picking the behavior that fits the real use case, not the one that looks cleanest on paper.</p>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>Copyright 2026 Sanjay Chauhan. All rights reserved.</p>
+    <a class="footer-link" href="https://github.com/oc-builds">
+      <span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#A9ABA6;display:inline-block;flex:none;"></span>
+      GitHub profile, github.com/oc-builds
+    </a>
+  </div>
+</footer>
+</body>
+</html>

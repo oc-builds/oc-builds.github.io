@@ -1,0 +1,10 @@
+# Files intentionally excluded from version control.
+# Author: Sanjay Chauhan
+# Date: 2026-05-24
+# CS499 Enhancement One rebuild of the CS360 Android Inventory App.
+
+node_modules/
+.env
+*.sqlite
+*.db
+*.log

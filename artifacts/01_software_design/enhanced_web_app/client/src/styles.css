@@ -1,0 +1,301 @@
+/*
+ * styles.css
+ * Purpose: Single global stylesheet for the inventory client. Provides a clean,
+ *          professional, Material-inspired look that echoes the original Android
+ *          app's Material 3 styling while staying simple and dependency-free.
+ * Author:  Sanjay Chauhan
+ * Date:    2026-05-24
+ * Context: CS499 Enhancement One rebuild of the CS360 Android Inventory App.
+ */
+
+/* ----- Design tokens ----- */
+:root {
+  --color-primary: #1565c0;
+  --color-primary-dark: #0d47a1;
+  --color-secondary: #e3eefb;
+  --color-danger: #c62828;
+  --color-danger-dark: #8e1f1f;
+  --color-text: #1c1b1f;
+  --color-text-muted: #5f6368;
+  --color-surface: #ffffff;
+  --color-background: #f4f5f7;
+  --color-border: #d9dce1;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+/* ----- Base ----- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  margin: 0;
+}
+
+/* ----- Cards ----- */
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+/* ----- Authentication screen ----- */
+.auth-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-title {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+
+.auth-subtitle {
+  margin: 0 0 20px;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+/* ----- Form fields ----- */
+.field-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+
+.text-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.text-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.15);
+}
+
+/* ----- Buttons ----- */
+.button-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn-primary:not(:disabled):hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-primary-dark);
+  border-color: var(--color-border);
+}
+
+.btn-secondary:not(:disabled):hover {
+  background-color: #d3e3f8;
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+  color: #ffffff;
+}
+
+.btn-danger:not(:disabled):hover {
+  background-color: var(--color-danger-dark);
+}
+
+.btn-text {
+  background-color: transparent;
+  color: #ffffff;
+}
+
+.btn-text:not(:disabled):hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn-small {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+/* ----- Messages ----- */
+.error-message {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  background-color: #fdecea;
+  color: var(--color-danger-dark);
+  border: 1px solid #f5c6c2;
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+}
+
+.info-banner {
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  background-color: var(--color-secondary);
+  color: var(--color-primary-dark);
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+}
+
+.muted-text {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+/* ----- Application shell ----- */
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-bar {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+}
+
+.app-bar-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.app-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-chip {
+  font-size: 0.85rem;
+  background-color: rgba(255, 255, 255, 0.18);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* ----- Toolbar ----- */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.search-input {
+  flex: 1;
+}
+
+/* ----- Data table ----- */
+.table-wrap {
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9rem;
+}
+
+.data-table th {
+  background-color: #eef1f5;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+  background-color: #f7f9fc;
+}
+
+.cell-subtext {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.actions-col {
+  white-space: nowrap;
+}
+
+.actions-col .btn + .btn {
+  margin-left: 8px;
+}
+
+/* ----- Item form ----- */
+.form-card {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+}

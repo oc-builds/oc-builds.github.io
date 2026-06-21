@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Databases, CS 340, Sanjay Chauhan</title>
+<meta name="description" content="The databases artifact: a Jupyter and PyMongo animal shelter project rebuilt as a FastAPI and MongoDB 7 service with schema validation, deliberate indexing, a GeoJSON migration, and an audited write chokepoint.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oc-builds.github.io/artifact-databases.html">
+<meta property="og:title" content="Databases, CS 340, Sanjay Chauhan">
+<meta property="og:description" content="The databases artifact: a Jupyter and PyMongo animal shelter project rebuilt as a FastAPI and MongoDB 7 service with schema validation, deliberate indexing, a GeoJSON migration, and an audited write chokepoint.">
+<meta property="og:image" content="https://oc-builds.github.io/og-image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Databases, CS 340, Sanjay Chauhan">
+<meta name="twitter:description" content="The databases artifact: a Jupyter and PyMongo animal shelter project rebuilt as a FastAPI and MongoDB 7 service with schema validation, deliberate indexing, a GeoJSON migration, and an audited write chokepoint.">
+<meta name="twitter:image" content="https://oc-builds.github.io/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="index.html">
+      <span class="monogram" aria-hidden="true">SC</span>
+      Sanjay Chauhan
+    </a>
+    <ul class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#self-assessment">Self-Assessment</a></li>
+      <li><a href="code-review.html">Code Review</a></li>
+      <li class="nav-dropdown">
+        <details>
+          <summary aria-current="true">Artifacts</summary>
+          <ul class="menu">
+            <li><a href="artifact-software-design.html">Software Design and Engineering (CS 360)</a></li>
+            <li><a href="artifact-algorithms.html">Algorithms and Data Structures (CS 300)</a></li>
+            <li><a href="artifact-databases.html" aria-current="page">Databases (CS 340)</a></li>
+          </ul>
+        </details>
+      </li>
+      <li><a href="outcomes.html">Outcomes</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+<section class="section">
+  <p class="eyebrow">03 / Artifact three</p>
+  <h1 class="h2">Animal shelter, FastAPI and MongoDB service</h1>
+  <p class="lead">Databases. A Jupyter and PyMongo animal shelter project with hard-coded credentials and no indexes, rebuilt as a FastAPI service on MongoDB 7: storage-layer schema validation, a compound index and a 2dsphere geospatial index, a GeoJSON migration, role-based access, and an audited write chokepoint with secret redaction.</p>
+  <div class="pills"><span class="pill">Databases</span><span class="pill">Security</span><span class="pill">Collaboration</span></div>
+
+  <h3 style="font-family:var(--font-head);font-size:23px;font-weight:600;color:var(--ink);margin:8px 0 16px;">Before and after</h3>
+    <div class="beforeafter">
+      <div class="ba-col before">
+        <p class="ba-label">Before, hard-coded secrets</p>
+        <pre class="ba-code before"><code># CRUD_Python_Module.py (original)
+class AnimalShelter(object):
+  def __init__(self, username, password):
+    HOST = &#x27;localhost&#x27;; PORT = 27017
+    self.client = MongoClient(
+      &#x27;mongodb://%s:%s@%s:%d&#x27;
+      % (username, password, HOST, PORT))
+# notebook: username = &quot;aacuser&quot;
+#           password = &quot;***&quot;   &lt;- was hard-coded</code></pre>
+      </div>
+      <div class="ba-col after">
+        <p class="ba-label">After, fail-fast config</p>
+        <pre class="ba-code after"><code># app/config.py (enhanced, fail-fast)
+def _require(name: str) -&gt; str:
+  value = os.environ.get(name)
+  if not value:
+    raise RuntimeError(
+      f&quot;Required env var {name!r} is not set.&quot;)
+  return value
+
+settings = Settings(
+  mongo_uri=_require(&quot;MONGO_URI&quot;),
+  jwt_secret=_require(&quot;JWT_SECRET&quot;))</code></pre>
+      </div>
+    </div>
+
+  <div class="card-actions" style="display:flex;gap:10px;flex-wrap:wrap;margin:0 0 8px;max-width:760px;">
+    <a class="btn btn-secondary btn-sm" href="artifacts/03_databases/original_shelter_notebook/ProjectTwo_Dashboard/CRUD_Python_Module.py">View original code</a>
+    <a class="btn btn-primary btn-sm" href="artifacts/03_databases/enhanced_shelter_service/app/config.py">View enhanced code</a>
+  </div>
+</section>
+
+<div class="band">
+  <section class="section">
+    <h3 style="font-family:var(--font-head);font-size:23px;font-weight:600;color:var(--ink);margin:0 0 10px;">Browse the code</h3>
+    <p style="max-width:760px;color:var(--muted);margin:0 0 22px;font-size:16px;">The full source for both versions ships with this site. Open any file to read it.</p>
+    <h4 style="font-family:var(--font-head);font-size:16px;color:var(--ink);margin:0 0 10px;">Original</h4>
+    <ul class="filelinks">
+      <li><a href="artifacts/03_databases/original_shelter_notebook/ProjectTwo_Dashboard/CRUD_Python_Module.py"><span>CRUD_Python_Module.py</span> <span class="path">original_shelter_notebook/.../CRUD_Python_Module.py</span></a></li>
+      <li><a href="artifacts/03_databases/original_shelter_notebook/ProjectTwo_Dashboard/ProjectTwoDashboard.ipynb"><span>ProjectTwoDashboard.ipynb</span> <span class="path">original_shelter_notebook/.../ProjectTwoDashboard.ipynb</span></a></li>
+    </ul>
+    <h4 style="font-family:var(--font-head);font-size:16px;color:var(--ink);margin:0 0 10px;">Enhanced</h4>
+    <ul class="filelinks">
+      <li><a href="artifacts/03_databases/enhanced_shelter_service/app/config.py"><span>config.py</span> <span class="path">enhanced_shelter_service/app/config.py</span></a></li>
+      <li><a href="artifacts/03_databases/enhanced_shelter_service/app/db.py"><span>db.py, audit chokepoint</span> <span class="path">enhanced_shelter_service/app/db.py</span></a></li>
+      <li><a href="artifacts/03_databases/enhanced_shelter_service/app/auth.py"><span>auth.py</span> <span class="path">enhanced_shelter_service/app/auth.py</span></a></li>
+      <li><a href="artifacts/03_databases/enhanced_shelter_service/app/models.py"><span>models.py</span> <span class="path">enhanced_shelter_service/app/models.py</span></a></li>
+      <li><a href="artifacts/03_databases/enhanced_shelter_service/scripts/migrate_geojson.py"><span>migrate_geojson.py</span> <span class="path">enhanced_shelter_service/scripts/migrate_geojson.py</span></a></li>
+      <li><a href="artifacts/03_databases/enhanced_shelter_service/scripts/db_setup.py"><span>db_setup.py</span> <span class="path">enhanced_shelter_service/scripts/db_setup.py</span></a></li>
+      <li><a href="artifacts/03_databases/enhanced_shelter_service/CONTRIBUTING.md"><span>CONTRIBUTING.md</span> <span class="path">enhanced_shelter_service/CONTRIBUTING.md</span></a></li>
+      <li><a href="artifacts/03_databases/enhanced_shelter_service/README.md"><span>README.md</span> <span class="path">enhanced_shelter_service/README.md</span></a></li>
+    </ul>
+  </section>
+</div>
+
+<section class="section">
+  <p class="eyebrow">Narrative</p>
+  <h2 class="h2">Enhancement narrative</h2>
+  <p class="lead">The full Milestone Four narrative for the databases enhancement.</p>
+  <div class="prose">
+    <h3>Describe the artifact</h3>
+    <p>The artifact is the Austin Animal Center project I originally built in CS 340, Advanced Programming Concepts, earlier in the SNHU computer science program. The original is two Python pieces. The first is an AnimalShelter class wrapping PyMongo with create, read, update, and delete methods. The second is a Jupyter notebook running a Dash dashboard that connects to a local MongoDB, loads all 10,000 animal outcome records into a pandas DataFrame at startup, and offers four rescue-category filters, a data table, a pie chart of breed counts, and a Leaflet map. The notebook hard-codes the database credentials. Latitude and longitude live as separate float columns and are read by column index. There is no schema validation, no indexes, no role separation, no audit log, no input validation, and the architecture is welded to Jupyter. The class is honest about a few of its weaknesses in comments. For Milestone Four I kept MongoDB and rebuilt everything around it.</p>
+    <h3>Justify the inclusion of the artifact and the improvements made</h3>
+    <p>I picked this artifact because the database layer is where the original was weakest, and because the gap between "a class that runs queries" and "a database I would put behind a real service" is the kind of gap an employer scrutinizes most. The enhanced version is a FastAPI service running on top of MongoDB 7. A docker-compose.yml brings the database up with one command, and python -m uvicorn app.main:app brings the API up. Together with the auto-generated Swagger UI at /docs, that is the working product. I deliberately did not build a React frontend on top of it for this milestone. The reason is honest: the API contract is what the database enhancement is about, and a half-finished frontend would distract from the database work. A polished React UI is the right thing to add during the Module 7 portfolio polish, on top of an API that already works.</p>
+    <p>The improvements break into four groups. The first is secrets and configuration. The hard-coded credentials are gone. app/config.py loads MONGO_URI and JWT_SECRET from a .env file and raises RuntimeError at import time if either is missing, so the server cannot start with a misconfiguration. A .env.example ships in the repo with placeholder values. The second group is database-layer hardening. A $jsonSchema validator is applied to the animals_geo collection on first boot, so MongoDB itself rejects documents that lack required fields. Indexes are explicit: a compound index ordered (breed, sex_upon_outcome, age_upon_outcome_in_weeks) because every rescue query includes breed, most include sex, and only some restrict by age, which is exactly what the leftmost-prefix rule of compound indexes is designed for. A 2dsphere index on the new location GeoJSON field replaces the old separate location_lat and location_long floats. A migrate_geojson.py script copies the original 10,000 records into the new collection, flipping the column order to the GeoJSON convention of [lon, lat] (the original stored lat first; the script range-checks every row against -180 to 180 longitude and -90 to 90 latitude, and any row outside those bounds is skipped with a warning rather than written, so a transposition cannot silently corrupt the new collection). On the live API path, the Pydantic GeoPoint validator in models.py raises a hard validation error on out-of-range coordinates, so the same property is enforced on writes after migration.</p>
+    <p>The third group is API-layer security. JWT auth is implemented with the algorithm pinned to HS256 via an explicit algorithms=["HS256"] list at decode time (an unpinned algorithm is a known CVE pattern). Passwords are hashed with bcrypt at a cost factor of 12. The login endpoint is rate-limited via slowapi to ten requests per minute. Pydantic models with extra="forbid" validate every request body, including a minimum password length on registration. Three roles exist: admin, staff, viewer. The honest framing of role-based access matters here, and the code comments say it directly. The FastAPI server connects to MongoDB with a single service account, which means application-side enforcement happens at the JWT layer through a require_role dependency, not at the database tier. The Mongo-side roles created in db_setup.py are documented as operator-tier controls for direct shell access and for ops scripts, not as the runtime enforcement path. That separation matters because overstating it would be wrong, and the database-background reader will notice. The fourth group is observability. Every write operation (create, update, delete) flows through a single Repository.save_with_audit() method, which writes an entry to a sibling audit_log collection in the same call. The audit entry captures the user, action, target collection, target id, timestamp, and a before/after snapshot. Field names matching ^(password|token|secret) are stripped from the snapshots so credentials cannot leak into the audit history. Because every write path funnels through one method, an audit entry cannot be skipped accidentally. A negative test verifies this property: writing directly to the collection produces no audit entry, which is exactly the failure mode we want to detect during review.</p>
+    <p>The code itself is structured per Dr. Bolton's M2 and M3 polish guidance. Single Responsibility splits the codebase across config.py (env loading), db.py (the repository chokepoint), models.py (Pydantic), auth.py (bcrypt and JWT), audit.py (the audit writer), crud.py (animal operations), routes_animals.py and routes_auth.py (FastAPI endpoints), and three scripts in scripts/. Routes do not touch PyMongo. CRUD does not know about JWT. Audit is only ever called from the chokepoint. Comments document the why rather than the what. The auth.py header explains why HS256 is pinned. The db.py header explains why every write goes through one chokepoint. The compound index header explains why breed-sex-age is the right order. The PyMongo client is owned by FastAPI's lifespan context manager, so it opens once on startup and closes cleanly on shutdown.</p>
+    <p>One design decision is worth explaining because it diverges from a strict reading of the original enhancement plan: the migration script writes to a new animals_geo collection rather than mutating animals in place. That decision is deliberate. An in-place migration would either succeed or fail atomically across 10,000 documents, and a partial failure mid-migration would leave the database in a mixed state where some documents have GeoJSON and others have flat floats. Writing to a new collection is idempotent, reversible by dropping the new collection, and makes the original artifact's data available for comparison if anything looks off after the migration. The API reads from animals_geo. The README and the narrative both say so explicitly.</p>
+    <p>The Mongo-versus-Postgres question is worth addressing directly, because Dr. Bolton approved skipping a full migration in Module One in favor of a conceptual analysis. Here it is. The animal outcome record is flexibly shaped: of the 10,000 rows in the original CSV, outcome_subtype is populated in only 46% of records and name is populated in 70%. In a Postgres schema those become nullable columns that the application has to null-check on every read, which is exactly the discipline MongoDB's optional field gives for free. Breed values are free-text strings that drift over time ("Labrador Retriever Mix" vs "Lab Mix" vs "Labrador Retriever/Pit Bull"), which is awkward to constrain in a relational schema and natural in MongoDB. The GeoJSON Point shape composes directly with MongoDB's 2dsphere index, which is a first-class feature of the engine rather than an extension. Postgres can do all of this through PostGIS for geo and jsonb for sparse fields, but on a 10,000-row catalog with the actual access pattern of rescue filters, proximity queries, and aggregations by breed, the MongoDB approach is simpler to model and the index strategy is more legible. My Category One web app uses SQLite because users and inventory items are a fixed-schema problem with hard relational constraints. Different problems, different tools, deliberately. Choosing the right storage model for the data shape is itself the skill the polyglot positioning is meant to demonstrate.</p>
+    <h3>Course outcomes</h3>
+    <p>In Module 1 I planned for this enhancement to support four course outcomes, and it does. Outcome 5 (security mindset) is the heaviest hit: secrets out of source via .env with fail-fast on missing configuration, JWT with a pinned algorithm and an 8-hour TTL, bcrypt at cost factor 12, rate limiting on the login endpoint, Pydantic validation on every request, MongoDB schema validation on the collection, role-based authorization at the JWT layer, an audit log with secret redaction, GeoJSON range assertions in the migration script, and the chokepoint property that makes audit bypass detectable in code review. Outcome 4 (well-founded techniques) is met through the stack itself: FastAPI, MongoDB 7, Pydantic, bcrypt, python-jose, slowapi, all current production-grade tools, applied through $jsonSchema validators, 2dsphere geospatial indexes, and aggregation pipelines. Outcome 3 (algorithmic principles and trade-offs) shows up explicitly in the indexing decisions. A compound index on (breed, sex, age) makes the rescue query an O(log n + k) operation (where k is the result size) instead of the O(n) full collection scan the original notebook ran on every filter change. A 2dsphere index makes a proximity query O(log n) instead of an O(n) Haversine computed in pandas. The aggregation pipeline that groups by breed runs server-side, returning the counts directly, which moves the work out of the Python process and into the database where it belongs. Outcome 2 (communication) is met through this narrative, the README, the CONTRIBUTING.md, and the OpenAPI schema that FastAPI auto-generates and serves at /openapi.json. The schema is an explicit interface contract that any consumer can read, which is a kind of technical communication.</p>
+    <p>Outcome 1 (collaborative environments) is the outcome I most needed to close before the final ePortfolio, and this is where I planned to land it. The enhancement does so through three artifacts, not through roles alone. The first is the CONTRIBUTING.md document, which describes the branching strategy (short-lived feature branches off main), the pull-request template (what changed, why, screenshots of any UI), and the named personas the system supports: a shelter manager who decides which rescue category an animal qualifies for, an intake clerk who updates outcome records during arrival, and a partner-rescue auditor who reviews the audit log for compliance. Each persona has a decision they make from this data, which is the "diverse audiences supporting organizational decision making" language the outcome describes verbatim. The second artifact is the OpenAPI schema. A backend developer and a frontend developer working in different repositories can collaborate against this schema without sharing a codebase, which is exactly the kind of contract-driven collaboration modern teams rely on. The third is the audit log itself: a partner-rescue auditor and an intake clerk can work on the same database without stepping on each other because every write is traceable to a user and a timestamp. Three different stakeholders, three different access paths, one source of truth. That is the collaborative environment.</p>
+    <h3>Reflection on the process</h3>
+    <p>The hardest decision in this build was not a technical one. It was cutting the React frontend that the original enhancement plan called for. The pass/fail grading on Milestone Four rewards a complete, working artifact. A polished API with a Swagger UI is a complete, working artifact. A polished API with a half-finished React frontend on top is not. I held the line on the API being the deliverable and put the frontend on the M7 polish list, where it belongs. The cut paid for itself almost immediately: the time I would have spent fighting Vite plus Leaflet plus state management went into the audit-log chokepoint, the rate limiter, the 2dsphere migration script's range assertions, and the honesty paragraph in the RBAC framing instead. Better to do less and do it right.</p>
+    <p>The second lesson was about overstating database-layer RBAC. My first instinct was to claim that the three Mongo roles I create in db_setup.py enforce permissions at the database tier. They do not, because the FastAPI server connects to MongoDB through a single service account. Runtime enforcement happens at the JWT layer through the require_role dependency in auth.py. The Mongo-side roles are real, they exist, and an operator running ops scripts or hitting the shell directly will use them. But the runtime enforcement path is the JWT layer, and the code says so in the file headers. Pretending otherwise would have been the kind of thing a database-background reader spots in five seconds. Writing the honest version was uncomfortable for about ten minutes and felt right afterwards.</p>
+    <p>The third lesson was about GeoJSON coordinate ordering. The original notebook read latitude from column 13 and longitude from column 14 (latitude first). GeoJSON is [longitude, latitude] in that order, which is the opposite of how most humans say it. A single transposed pair would have silently corrupted every proximity query in the new collection because every value would still be a valid float. The migration script range-checks the longitude against [-180, 180] and the latitude against [-90, 90] for every row, and any row that fails the check is skipped with a warning rather than written, so a transposition cannot silently corrupt the new collection. The same property is enforced as a hard Pydantic validator on the API write path in models.py, which raises a 422 on out-of-range coordinates. Those two checks together are maybe twenty lines of code. It exists because I almost shipped without it and noticed the column ordering in the original notebook only on a second read of the source. The small habit of looking at the actual data, which paid off in Milestone Three when I caught the "near-sorted CSV" claim before defending it on paper, paid off again here.</p>
+    <p>What I will take from this milestone is that the database tier is where security work has the worst cost-of-skipping ratio. A bug in a route handler shows up in one endpoint. A missing validator on a Mongo collection corrupts the database for everyone who reads it afterwards. The work of writing the validator, choosing the index, picking the geo encoding, and funneling writes through a single audit-aware chokepoint is the work that pays for itself the longest after the code ships. That framing, more than any single feature I built this week, is what I expect to carry forward into the final ePortfolio polish and beyond.</p>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>Copyright 2026 Sanjay Chauhan. All rights reserved.</p>
+    <a class="footer-link" href="https://github.com/oc-builds">
+      <span aria-hidden="true" style="width:18px;height:18px;border-radius:50%;background:#A9ABA6;display:inline-block;flex:none;"></span>
+      GitHub profile, github.com/oc-builds
+    </a>
+  </div>
+</footer>
+</body>
+</html>

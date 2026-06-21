@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.Theme.InventoryTracker" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">#D0BCFF</item>
+        <item name="colorOnPrimary">#371E55</item>
+        <item name="colorPrimaryContainer">#4F378B</item>
+        <item name="colorOnPrimaryContainer">#EADDFF</item>
+
+        <item name="colorSecondary">#CCC7DB</item>
+        <item name="colorOnSecondary">#332D41</item>
+        <item name="colorSecondaryContainer">#4A4458</item>
+        <item name="colorOnSecondaryContainer">#E8DEF8</item>
+
+        <item name="colorTertiary">#F0BFCE</item>
+        <item name="colorOnTertiary">#4A2033</item>
+        <item name="colorTertiaryContainer">#62344A</item>
+        <item name="colorOnTertiaryContainer">#FFD8E4</item>
+
+        <item name="colorError">#F2B8B5</item>
+        <item name="colorOnError">#601410</item>
+        <item name="colorErrorContainer">#8C1d18</item>
+        <item name="colorOnErrorContainer">#F9DEDC</item>
+
+        <item name="colorSurface">#1C1B1F</item>
+        <item name="colorOnSurface">#E6E1E6</item>
+        <item name="colorSurfaceVariant">#49454E</item>
+        <item name="colorOnSurfaceVariant">#CAC7D0</item>
+
+        <item name="android:textColorPrimary">#E6E1E6</item>
+        <item name="android:textColorSecondary">#CAC7D0</item>
+
+        <item name="android:windowBackground">#1C1B1F</item>
+    </style>
+
+    <style name="Theme.InventoryTracker" parent="Base.Theme.InventoryTracker" />
+
+    <style name="Widget.InventoryTracker.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+    </style>
+
+    <style name="Widget.InventoryTracker.Button.Contained" parent="Widget.Material3.Button">
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+    </style>
+
+    <style name="Widget.InventoryTracker.EditText" parent="Widget.Material3.TextInputEditText.FilledBox">
+        <item name="android:minHeight">56dp</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="Widget.InventoryTracker.Typography.HeadlineLarge" parent="">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/md3_on_surface</item>
+    </style>
+
+    <style name="Widget.InventoryTracker.Typography.TitleLarge" parent="">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/md3_on_surface</item>
+    </style>
+
+    <style name="Widget.InventoryTracker.Typography.BodyLarge" parent="">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/md3_on_surface</item>
+    </style>
+
+    <style name="Widget.InventoryTracker.Typography.BodyMedium" parent="">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/md3_on_surface</item>
+    </style>
+
+    <style name="Widget.InventoryTracker.Typography.LabelSmall" parent="">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/md3_on_surface_variant</item>
+    </style>
+</resources>
