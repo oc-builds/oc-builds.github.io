@@ -122,7 +122,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* Shared sizing for every top-nav item, links and the dropdown trigger alike,
    so the links and the summary sit on the same baseline at the same height. */
 .nav-list a,
-.nav-dropdown > summary {
+.nav-dropdown > details > summary {
   display: inline-flex;
   align-items: center;
   padding: 8px 13px;
@@ -139,19 +139,35 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 
 /* Dropdown for the three artifacts (CSS-only, also works without JS) */
 .nav-dropdown { position: relative; }
-.nav-dropdown > summary {
+/* The native disclosure marker is removed in three layers so it is gone in
+   every engine, and so nothing later can put it back:
+   1. display:inline-flex (with !important to beat the UA stylesheet, which
+      forces summary to display:list-item) takes the summary off the
+      list-item box model entirely. With no list-item box there is no
+      principal marker box, which is what produces the triangle in Blink and
+      Gecko, so the ::marker never gets generated in the first place.
+   2. list-style:none is a belt-and-braces guard for any engine that still
+      reserves a marker while transitioning display types.
+   3. ::-webkit-details-marker { display:none } removes the separate marker
+      pseudo-element that older WebKit and Safari draw, which is NOT a
+      ::marker and is unaffected by the display change above.
+   The empty ::marker rule covers the standardized pseudo for completeness. */
+.nav-dropdown > details > summary {
+  display: inline-flex !important;
   cursor: pointer;
   gap: 6px;
+  list-style: none;
 }
-/* Hide the native disclosure marker in every browser. Three rules cover it:
-   list-style:none and ::marker handle standards engines, the -webkit rule
-   handles older WebKit, and inline-flex above prevents a list-item marker box. */
-.nav-dropdown > summary { list-style: none; }
-.nav-dropdown > summary::marker { content: ""; }
-.nav-dropdown > summary::-webkit-details-marker { display: none; }
-/* Custom caret placed AFTER the word, pointing down when closed. */
-.nav-dropdown > summary::after {
+.nav-dropdown > details > summary::marker { content: ""; font-size: 0; }
+.nav-dropdown > details > summary::-webkit-details-marker { display: none; }
+/* The one and only caret: a CSS-border triangle placed AFTER the word.
+   border-width:5px 4px 0 4px with only the TOP border colored renders a solid
+   triangle pointing DOWN, which is the closed state. flex:none keeps the flex
+   container from stretching the zero-size box, and the explicit alignment keeps
+   it centered on the text. */
+.nav-dropdown > details > summary::after {
   content: "";
+  flex: none;
   width: 0;
   height: 0;
   border-style: solid;
@@ -159,11 +175,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   border-color: currentColor transparent transparent transparent;
   transition: transform 0.15s ease;
 }
-/* When open, flip the caret to point up so it reads as expand and collapse. */
-.nav-dropdown[open] > summary::after { transform: rotate(180deg); }
-.nav-dropdown > summary:hover { background: #E0DED7; color: var(--ink); }
-.nav-dropdown[open] > summary { background: #E0DED7; color: var(--ink); }
-.nav-dropdown > summary[aria-current] { color: var(--ink); }
+/* When open, rotate 180deg so the same triangle points UP: expanded state. */
+.nav-dropdown > details[open] > summary::after { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown > details > summary::after { transition: none; }
+}
+.nav-dropdown > details > summary:hover { background: #E0DED7; color: var(--ink); }
+.nav-dropdown > details[open] > summary { background: #E0DED7; color: var(--ink); }
+.nav-dropdown > details > summary[aria-current] { color: var(--ink); }
 .nav-dropdown .menu {
   position: absolute;
   top: calc(100% + 4px);
@@ -567,43 +586,21 @@ table.outcomes tbody tr:last-child td { border-bottom: none; }
    Video card (code review)
    ========================================================================= */
 .video-card { margin: 0; max-width: 760px; }
-.video-frame {
+.video-embed {
   position: relative;
   aspect-ratio: 16 / 9;
   border-radius: 3px;
   border: 1px solid #C6C4BC;
   overflow: hidden;
-  background: repeating-linear-gradient(135deg, #DEDCD5 0 14px, #E8E6E0 14px 28px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
+  background: #1A1C1A;
 }
-.video-frame .tag {
+.video-embed iframe {
   position: absolute;
-  top: 14px;
-  left: 16px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: #85837B;
-}
-.video-frame .play {
-  width: 66px;
-  height: 66px;
-  border-radius: 50%;
-  background: var(--accent);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.video-frame .play::before {
-  content: "";
-  display: block;
-  width: 0; height: 0;
-  border-style: solid;
-  border-width: 13px 0 13px 21px;
-  border-color: transparent transparent transparent #fff;
-  margin-left: 5px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 .video-card figcaption { margin: 16px 2px 0; font-size: 15px; line-height: 1.55; color: var(--muted); }
 
